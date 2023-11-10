@@ -1,52 +1,80 @@
 // when no key pressed print checkerboard in figure 1
 // when 'c' pressed print inverse checkerboard
 
-// while KBD != 'c'
-//	print(0xffff,0x0000 * 16)
-// 
-//	if KBD == 'c'
-//		print(0xffff,0x0000, * 16)
 
-(wait_for_c_press)
+
 
 // print default checkboard 
-// for each word in the row print alternating pixels
+
+// create current_address variable, set starting value to 0x4000
+@SCREEN
+D=A
+@current_address
+M=D
+
+//create counter to check when new row is reached
+@i
+M=0
+
 @21845
 D=A
+@bw_word
+M=D
 
-@SCREEN
-M=!D
-
-
-
-
-
-
-// get input from KBD
-@KBD
+(print_word)
+//// set current_address to bwp
+//get bwp value
+@bw_word
 D=M
 
-// if 'c' not presed; if KBD - 67 != 0
-// go to top of program; re-print checkerboard
-@67
-M=A
-D=D-M
-@wait_for_c_press
-D;JNE
+//go to current_address
+@current_address
+A=M
 
-// if 'c'pressed; if KBD - 67 == 0
-// continue and print inverse keyboard
+//load bwp value
+M=D
 
-@SCREEN
+//increase current address by 1
+//@16
+//D=A
+@current_address
+M=M+1
+
+// increment i
+@i
+M=M+1
 D=M
-M=!D
+
+// if i is 32 then reset i to 0 and invert bwp
+@32
+D=D-A
+
+@invert_word_reset_i
+D;JEQ
 
 
-
-
-
-
-
-
-@wait_for_c_press
+// jump to top of loop
+@print_word
 0;JMP
+
+
+
+
+// after 32 words have been printed, reset i to 0 and invert bwp
+(invert_word_reset_i)
+@bw_word
+M=!M
+@i
+M=0
+@print_word
+0;JMP
+// go to top
+@listen_for_c_press
+0;JMP
+
+(flipword)
+@bw_word
+M=!M
+@print_word
+0;JMP
+
