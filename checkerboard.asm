@@ -48,7 +48,14 @@ D=M
 // if i is 32 then reset i to 0 and invert bwp
 @32
 D=D-A
+@invert_word_reset_i
+D;JEQ
 
+//check if KBD input == 'c' (67)
+@KBD
+D=M
+@67
+D=D-A
 @invert_word_reset_i
 D;JEQ
 
@@ -56,6 +63,7 @@ D;JEQ
 // jump to top of loop
 @print_word
 0;JMP
+
 
 
 
