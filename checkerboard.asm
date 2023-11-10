@@ -3,17 +3,24 @@
 
 // while KBD != 'c'
 //	print(0xffff,0x0000 * 16)
+// 
 //	if KBD == 'c'
 //		print(0xffff,0x0000, * 16)
-
 
 (wait_for_c_press)
 
 // print default checkboard 
-// set 0x4000 to 1
+// for each word in the row print alternating pixels
+@21845
+D=A
+
 @SCREEN
-D=0
 M=!D
+
+
+
+
+
 
 // get input from KBD
 @KBD
@@ -24,12 +31,12 @@ D=M
 @67
 M=A
 D=D-M
-
 @wait_for_c_press
 D;JNE
 
 // if 'c'pressed; if KBD - 67 == 0
-// print inverse keyboard
+// continue and print inverse keyboard
+
 @SCREEN
 D=M
 M=!D
