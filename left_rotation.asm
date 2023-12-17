@@ -6,10 +6,6 @@ D=M
 @start
 D-1;JLT
 
-// i
-@i
-M=0
-
 //load answer with start value
 @R0
 D=M
@@ -18,7 +14,6 @@ M=D
 
 //double R0, R1 times, output stored in R2
 (rotate_left)
-
 @R2
 D=M
 
@@ -30,19 +25,15 @@ D;JLT
 @R2
 M=M+D
 
-//increment i
-(inc_i)
-@i
-M=M+1
-D=M
-
-//i - R1
+//decrement R1
+(decrement_r1)
 @R1
-D=D-M
+M=M-1
+D=M
 
 //loop when i < R1
 @rotate_left
-D;JLT
+D;JGT
 
 (end)
 @end
@@ -53,6 +44,6 @@ D;JLT
 D=M
 M=M+D
 M=M+1
-@inc_i
+@decrement_r1
 0;JMP
 
