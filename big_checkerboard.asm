@@ -6,9 +6,19 @@
 
 //1 row of squares = 32 * 64 words = 
 
+(start)
+
 @word
 M=-1
 
+@67
+D=A
+@KBD
+D=D-M
+@flip_word
+D;JEQ
+
+(setup)
 @SCREEN
 D=A
 
@@ -97,7 +107,14 @@ MD=M-1
 @row
 D;JGT
 
-(end)
-@end
+@start
 0;JMP
+
+(flip_word)
+@word
+M=!M
+@setup
+0;JMP
+
+
 
