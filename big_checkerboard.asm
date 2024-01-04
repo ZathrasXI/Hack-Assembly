@@ -26,17 +26,26 @@ M=D
 //board = 4 rows
 @4
 D=A
-@board_count
+@row_count
 M=D
+
 (board)
+
+
+
+(row)
 @256
 D=A
 @bw_count
 M=D
 
+
+
 (bw)
+
 (b_square)
-D=-1
+@word
+D=M
 @addr
 A=M
 M=D
@@ -55,7 +64,8 @@ D=A
 M=D
 
 (w_square)
-D=0
+@word
+D=!M
 @addr
 A=M
 M=D
@@ -73,14 +83,18 @@ D=A
 @s_count
 M=D
 
+
 @bw_count
 MD=M-1
 @bw
 D;JGT
 
-@board_count
+@word
+M=!M
+
+@row_count
 MD=M-1
-@board
+@row
 D;JGT
 
 (end)
