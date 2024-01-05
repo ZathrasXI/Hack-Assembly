@@ -5,7 +5,57 @@ D=A
 @base
 M=D
 
-// '@' symbol
+@init_symbol
+0;JMP
+
+(main)
+@print
+0;JMP
+(key_press)
+@KBD
+D=M
+// <
+@130
+D=D-A
+@key_press
+D;JEQ
+// ^
+@KBD
+D=M
+@131
+D=D-A
+@key_press
+D;JEQ
+// >
+@KBD
+D=M
+@132
+D=D-A
+@key_press
+D;JEQ
+// v
+@KBD
+D=M
+@133
+D=D-A
+@down
+D;JEQ
+
+@key_press
+0;JMP
+
+@main
+0;JMP
+
+(down)
+@352
+D=A
+@base
+M=M+D
+@main
+0;JMP
+
+(init_symbol)
 @15360
 D=A
 @l0
@@ -56,6 +106,9 @@ M=D
 
 @l10
 M=0
+
+@main
+0;JMP
 
 (print)
 //row 0
@@ -166,3 +219,5 @@ D=M
 @tmp
 A=M
 M=D
+@key_press
+0;JMP
