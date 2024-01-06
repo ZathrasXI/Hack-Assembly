@@ -11,48 +11,32 @@ M=D
 (main)
 @print
 0;JMP
+
 (key_press)
 @KBD
 D=M
-// <
-@130
-D=D-A
-@key_press
-D;JEQ
-// ^
-@KBD
-D=M
-@131
-D=D-A
-@key_press
-D;JEQ
-// >
-@KBD
-D=M
-@132
-D=D-A
 @key_press
 D;JEQ
 // v
-@KBD
-D=M
 @133
 D=D-A
 @down
 D;JEQ
 
 @key_press
-0;JMP
-
-@main
-0;JMP
+D;JNE
 
 (down)
+@clear
+0;JMP
+(down_addr)
 @352
 D=A
 @base
 M=M+D
-@main
+@KBD
+M=0
+@print
 0;JMP
 
 (init_symbol)
@@ -220,4 +204,28 @@ D=M
 A=M
 M=D
 @key_press
+0;JMP
+
+(clear)
+@base
+D=M
+@i
+M=D
+@11
+D=A
+@counter
+M=D
+(loop)
+@i
+A=M
+M=0
+@32
+D=A
+@i
+M=M+D
+@counter
+MD=M-1
+@loop
+D;JNE
+@down_addr
 0;JMP
