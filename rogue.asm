@@ -357,6 +357,14 @@ D;JGT
 
 
 
+//word is greater than 256 then symbol is on right side
+//when on right side, and instruction is to go left, then symbol >> 8
+//to go left we shift right
+
+
+//... to go right we shift left
+// when word is less than 256 then symbol is on left side
+// when on left side, and instruction is to go right, then symbol << 8
 
 
 
