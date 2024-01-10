@@ -110,6 +110,17 @@ M=0
 0;JMP
 
 (down)
+//lower border check
+//if base + 352 > 24479 return to key press
+@352
+D=A
+@base
+D=D+M
+@24479
+D=A-D
+@key_press
+D;JLT
+
 @down_ret
 D=A
 @R13
