@@ -22,14 +22,42 @@ D;JEQ
 D=D-A
 @down
 D;JEQ
+// ^
+@KBD
+D=M
+@131
+D=D-A
+@up
+D;JEQ
 
 @key_press
 D;JNE
 
-(down)
+(up)
+@up_ret
+D=A
+@R13
+M=D
 @clear
 0;JMP
-(down_addr)
+(up_ret)
+@352
+D=A
+@base
+M=M-D
+@KBD
+M=0
+@print
+0;JMP
+
+(down)
+@down_ret
+D=A
+@R13
+M=D
+@clear
+0;JMP
+(down_ret)
 @352
 D=A
 @base
@@ -227,5 +255,6 @@ M=M+D
 MD=M-1
 @loop
 D;JNE
-@down_addr
+@R13
+A=M
 0;JMP
