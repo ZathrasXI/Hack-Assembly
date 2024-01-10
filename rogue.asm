@@ -8,6 +8,9 @@ M=D
 @init_symbol
 0;JMP
 
+@bottom_border
+0;JMP
+
 (main)
 @print
 0;JMP
@@ -275,7 +278,7 @@ D=M
 @tmp
 A=M
 M=D
-@key_press
+@bottom_border
 0;JMP
 
 (clear)
@@ -302,3 +305,35 @@ D;JNE
 @R13
 A=M
 0;JMP
+
+(bottom_border)
+@96
+D=A
+@i
+M=D
+
+@24480
+D=A
+@border_addr
+M=D
+
+(fill_border)
+@border_addr
+A=M
+M=-1
+@border_addr
+M=M+1
+@i
+MD=M-1
+@fill_border
+D;JGT
+@key_press
+0;JMP
+
+
+
+
+
+
+
+
