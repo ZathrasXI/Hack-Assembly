@@ -81,6 +81,17 @@ M=0
 0;JMP
 
 (up)
+//upper border check
+//if base - 352 < 16384 return to key press
+@352
+D=A
+@base
+D=D-M
+@16384
+D=D-A
+@key_press
+D;JLT
+
 @up_ret
 D=A
 @R13
@@ -88,6 +99,7 @@ M=D
 @clear
 0;JMP
 (up_ret)
+
 @352
 D=A
 @base
